@@ -1,0 +1,40 @@
+User behavior
+- Start a new game
+- Select a letter
+- Continue to the next level
+- Quit the game
+
+
+Questions
+- How many lives does the user have ? 
+- Word list - where do I get this from ? 
+- How many levels ? 
+- Are there any difficuilty levels ? 
+
+
+Psuedo code
+-------------
+
+MAX_LIVES = 5
+WORDLIST = []
+
+def start_game
+end
+
+def select_word
+end
+
+def quit_game
+end
+
+def user_select_letter
+end
+
+def letter_in_word
+end
+
+def lives_left
+end
+
+
+
