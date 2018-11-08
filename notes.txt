@@ -36,5 +36,13 @@ end
 def lives_left
 end
 
+Mentor Catchup 9th Nov
+------------------------
 
-
+--> Start simple in the word lists , no spaces or special characters etc (Simplest way to achive the result)
+--> Use sample(p1) public instead of Random class
+--> Use constant instead of @word_list (Learn about variables)
+--> select_word is doing too many things and the name is misleading (ONE METHOD ONE THING)
+--> Difference between Array.new and []
+--> Use `map` for select_word (Ruby way)
+--> Difference between print and puts

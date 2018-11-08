@@ -19,9 +19,7 @@ class Hangman
         @correct_letters.push(letter)
       end
     end
-    @current_word
-
-    @correct_letters
+     @correct_letters
   end
 
 
@@ -38,11 +36,13 @@ class Hangman
     end
   end
 
-  ## TODO: Display to the user how long the word is
+  ## TODO: Refactor based on catchup
+  ## DONE: Display to the user how long the word is
   ## TODO: Ask the user to select a letter
   ## TODO: Identify whether the letter has already been used or whether the letter is part of the word or not
 end
 
 new_game = Hangman.new
-p new_game.select_word
+new_game.select_word
+
 new_game.display
