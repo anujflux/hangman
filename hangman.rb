@@ -21,7 +21,8 @@ class Hangman
       end
   end
 
-  def get_user_input
+  def get_user_guess
+    puts "\nGuess a letter\n"
     while letter = gets.chomp
       case letter
       when "exit"
@@ -43,9 +44,7 @@ class Hangman
 
   def letter_already_guessed?(letter)
     if @letters_guessed.include?(letter)
-      puts "Letter guessed before as well, please select another letter"
-      puts "Here are all the letters you have already guessed: "
-      puts @letters_guessed
+      puts "Letter guessed before as well, please guess another letter"
       return true
     else
       return false
@@ -56,15 +55,27 @@ class Hangman
     return @current_word.include?(letter)
   end
 
+  def start_game
+    select_word
+    puts "Welcome to Hangman!!"
+    puts "You are guessing a word of #{@current_word.length} letters"
+    puts "Type exit at anytime to quit the game"
+    display_dashes
+    get_user_guess
+  end
+
 
   ## DONE: Refactor based on catchup
   ## DONE: Display to the user how long the word is
   ## DONE: Ask the user to select a letter
   ## DONE: Identify whether the letter has already been used or whether the letter is part of the word or not
+  ## TODO: Display the dashes and correct guessed words after every letter guessed
+  ## TODO: Let the user know whether when they win
+  ## TODO: Add maximum guesses allowed feature
+  ## TODO: Restart a game
+  ## TODO: Start a new game after the current game finishes
+  ## TODO: Metrics - win, loses, quits etc.
 end
 
 new_game = Hangman.new
-new_game.select_word
-new_game.display_dashes
-puts "\nGuess a letter\n"
-new_game.get_user_input
+new_game.start_game
