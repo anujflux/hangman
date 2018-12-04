@@ -102,7 +102,7 @@ new_game.start_game
   ## DONE: Identify whether the letter has already been used or whether the letter is part of the word or not
 
 
-  ## TODO: Display the dashes and correct guessed words after every letter guessed
+  ## DONE: Display the dashes and correct guessed words after every letter guessed
   ## TODO: Let the user know whether when they win
   ## TODO: Add maximum guesses allowed feature
 
