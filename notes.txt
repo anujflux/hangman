@@ -45,3 +45,15 @@ Mentor Catchup 9th Nov
 --> (DONE) select_word is doing too many things and the name is misleading (ONE METHOD ONE THING)
 --> (DONE) Difference between Array.new and []
 --> (DONE) Use `map` for select_word (Ruby way)
+
+
+
+ Mentoring catch up 23rd Nov
+ ------------------------
+  # get_user_guess is doing a bit more but leave it for now. 
+  # Finish simple use case of the game
+  # Five lines in a method
+    # Does my method do a single thing ?
+  # Object Oriented game -
+  #   Game, Round - Games can have multiple rounds and player can play multiple games. For eg, select_word belongs to the Game and not the round
+  #   Interaction - Displaying messages to the user
