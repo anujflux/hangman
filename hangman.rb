@@ -4,11 +4,12 @@ $stdout.sync = true
 
 class Hangman
   WORD_LIST = ['hangman']
-  MAX_LIVES = 5
+  MAX_GUESSES = 5
 
   def initialize
-    @letters_guessed = []
-    @lives_lost = 0
+    @correct_letters_guessed = []
+    @incorrect_letters_guessed = []
+    @count_incorrect_guesses = 0
   end
 
   def select_word
@@ -17,7 +18,7 @@ class Hangman
 
   def display_dashes_with_correct_guesses
     @current_word.split("").each do |letter|
-      if @letters_guessed.include?(letter)
+      if @correct_letters_guessed.include?(letter)
         print letter
       else
         print "-"
@@ -46,7 +47,6 @@ class Hangman
       elsif user_input.length > 1
         show_message_and_continue "You can only guess one letter at a time"
       else
-        check_lives_remaining
         validate_guess(user_input) unless letter_already_guessed?(user_input)
         if has_won?
           binding.pry
@@ -63,22 +63,28 @@ class Hangman
   end
 
   def validate_guess(letter)
-    @letters_guessed.push(letter)
-    if is_guess_correct_or_wrong?(letter)
+    letter_count = count_letters_in_word(letter)
+    if letter_count > 0
+      letter_count.times do
+        @correct_letters_guessed.push(letter)
+      end
       show_message_and_continue "Correct guess"
     else
-      life_lost
-      show_message_and_continue "Incorrect guess, please try again. You now have #{lives_remaining} lives left"
+      show_message_and_continue "Incorrect guess !"
+      @incorrect_letters_guessed.push(letter)
+      incorrect_guess
+      show_message_and_continue "You now have #{guesses_remaining} lives left"
     end
     display_dashes_with_correct_guesses
   end
 
-  def life_lost
-    @lives_lost = @lives_lost + 1
+  def incorrect_guess
+    @count_incorrect_guesses = @count_incorrect_guesses + 1
+    check_guesses_remaining
   end
 
   def letter_already_guessed?(letter)
-    if @letters_guessed.include?(letter)
+    if @correct_letters_guessed.include?(letter)
       puts "Letter guessed before as well, please guess another letter"
       return true
     else
@@ -86,8 +92,8 @@ class Hangman
     end
   end
 
-  def is_guess_correct_or_wrong?(letter)
-    return @current_word.include?(letter)
+  def count_letters_in_word(letter)
+    return @current_word.count(letter)
   end
 
   def load_game
@@ -100,18 +106,18 @@ class Hangman
   def display_welcome_message
     show_message_and_continue "Welcome to Hangman!!"
     show_message_and_continue "You are guessing a word of #{@current_word.length} letters"
-    show_message_and_continue "You have #{MAX_LIVES} guesses"
+    show_message_and_continue "You have #{MAX_GUESSES} guesses"
     show_message_and_continue "Type exit at anytime to quit the game"
   end
 
-  def check_lives_remaining
-    if lives_remaining <= 1
-      abort_game("You do not have enought lives left to continue the game")
+  def check_guesses_remaining
+    if guesses_remaining <= 0
+      abort_game("You do not have enough guesses remanining to continue the game\nThe correct word was '#{@current_word}'")
     end
   end
 
-  def lives_remaining
-    MAX_LIVES - @lives_lost
+  def guesses_remaining
+    MAX_GUESSES - @count_incorrect_guesses
   end
 
   def abort_game(reason)
@@ -120,7 +126,7 @@ class Hangman
   end
 
   def has_won?
-    @current_word.split("").sort == @letters_guessed.sort
+    @current_word.split("").sort.join == @correct_letters_guessed.sort.join
   end
 end
 
@@ -134,7 +140,7 @@ new_game.load_game
 
 
   ## DONE: Display the dashes and correct guessed words after every letter guessed
-  ## TODO: Let the user know whether when they win
+  ## DONE: Let the user know whether when they win
   ## TODO: Show the correct word when the user loses the game
   ## DONE: Add maximum guesses allowed feature
 
