@@ -3,7 +3,7 @@ require 'pry'
 $stdout.sync = true
 
 class Hangman
-  WORD_LIST = ['hangman']
+  WORD_LIST = ['soumya']
   MAX_GUESSES = 5
 
   def initialize
@@ -49,7 +49,6 @@ class Hangman
       else
         validate_guess(user_input) unless letter_already_guessed?(user_input)
         if has_won?
-          binding.pry
           show_message_and_continue "You have won ! See you next time !"
           exit
         end
