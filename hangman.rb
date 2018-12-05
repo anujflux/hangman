@@ -141,7 +141,7 @@ new_game.load_game
 
   ## DONE: Display the dashes and correct guessed words after every letter guessed
   ## DONE: Let the user know whether when they win
-  ## TODO: Show the correct word when the user loses the game
+  ## DONE: Show the correct word when the user loses the game
   ## DONE: Add maximum guesses allowed feature
 
   ## LATER: Write some rspecs
